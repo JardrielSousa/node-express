@@ -5,3 +5,5 @@
 # install express
 https://expressjs.com/pt-br/starter/installing.html
 
+# install body-parser
+https://www.npmjs.com/package/body-parser

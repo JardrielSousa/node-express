@@ -21,20 +21,23 @@ const userRoute = (app) => {
     app.route('/users/:id?')
     .get((req,res)=>{
         const users = getUsers();
-    return res.send({users});
+        res.send({users});
     })
     .post((req,res)=>{
-        const users = getUsers();
-        users.push(req.body);
-        saveUser(users);
+        const users = getUsers()
+        users.push(req.body)
+        saveUser(users)
         res.sendStatus(201).send('OK')
     })
     .put((req,res) => {
-        const users = getUsers()
+        const { index } = req.params.id;
+        const { name } = req.body;
 
+        console.log('i:'+index);
+        console.log('n:'+name);
+        const users = getUsers()
         saveUser(users.map(user => {
-            console.log('user'+user);
-            if(user.id === req.params.id){
+            if(user.id == req.params.id){
                 return {
                     ...user,
                     ...req.body
@@ -48,7 +51,6 @@ const userRoute = (app) => {
     })
     .delete((req,res)=>{
         const users = getUsers()
-
         saveUser(users.filter(user=>user.id !== req.params.id))
 
         res.sendStatus(200).send('Deleted')

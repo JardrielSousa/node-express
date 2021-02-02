@@ -7,11 +7,9 @@ const port = 2000
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
 
 userRoute(app);
 
-
-app.get('/',(req,res)=>{res.send('Olá mundo!!')})
-app.listen(port,()=>console.log('Api rodando na porta' + port));
+app.listen(port,()=>console.log('Api rodando na porta ' + port));

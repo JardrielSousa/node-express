@@ -21,6 +21,13 @@ const userRoute = (app) => {
     app.route('/users/:id?')
     .get((req,res)=>{
         const users = getUsers();
+        if(req.params.id){
+            users.map(user=>{
+                if(user.id == req.params.id ){
+                    res.send(user)
+                }
+            })
+        }
         res.send({users});
     })
     .post((req,res)=>{

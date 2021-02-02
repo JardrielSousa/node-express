@@ -22,11 +22,36 @@ const userRoute = (app) => {
     .get((req,res)=>{
         const users = getUsers();
     return res.send({users});
-    }).post((req,res)=>{
+    })
+    .post((req,res)=>{
         const users = getUsers();
         users.push(req.body);
         saveUser(users);
         res.sendStatus(201).send('OK')
+    })
+    .put((req,res) => {
+        const users = getUsers()
+
+        saveUser(users.map(user => {
+            console.log('user'+user);
+            if(user.id === req.params.id){
+                return {
+                    ...user,
+                    ...req.body
+                }
+            }
+
+            return user
+        }));
+
+        res.sendStatus(200).send('changed!')
+    })
+    .delete((req,res)=>{
+        const users = getUsers()
+
+        saveUser(users.filter(user=>user.id !== req.params.id))
+
+        res.sendStatus(200).send('Deleted')
     })
 }
 

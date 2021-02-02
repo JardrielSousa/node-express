@@ -30,11 +30,6 @@ const userRoute = (app) => {
         res.sendStatus(201).send('OK')
     })
     .put((req,res) => {
-        const { index } = req.params.id;
-        const { name } = req.body;
-
-        console.log('i:'+index);
-        console.log('n:'+name);
         const users = getUsers()
         saveUser(users.map(user => {
             if(user.id == req.params.id){
@@ -51,7 +46,7 @@ const userRoute = (app) => {
     })
     .delete((req,res)=>{
         const users = getUsers()
-        saveUser(users.filter(user=>user.id !== req.params.id))
+        saveUser(users.filter(user=>user.id != req.params.id))
 
         res.sendStatus(200).send('Deleted')
     })

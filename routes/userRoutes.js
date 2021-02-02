@@ -21,7 +21,7 @@ const userRoute = (app) => {
     app.route('/users/:id?')
     .get((req,res)=>{
         const users = getUsers();
-        res.send({users});
+    return res.send({users});
     }).post((req,res)=>{
         const users = getUsers();
         users.push(req.body);
